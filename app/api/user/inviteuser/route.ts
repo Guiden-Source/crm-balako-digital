@@ -35,19 +35,8 @@ export async function POST(req: Request) {
 
     const password = generateRandomPassword();
 
-    let message = "";
-
-    switch (language) {
-      case "en":
-        message = `You have been invited to ${process.env.NEXT_PUBLIC_APP_NAME} \n\n Your username is: ${email} \n\n Your password is: ${password} \n\n Please login to ${process.env.NEXT_PUBLIC_APP_URL} \n\n Thank you \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
-        break;
-      case "cz":
-        message = `Byl jste pozván do ${process.env.NEXT_PUBLIC_APP_NAME} \n\n Vaše uživatelské jméno je: ${email} \n\n Vaše heslo je: ${password} \n\n Prosím přihlašte se na ${process.env.NEXT_PUBLIC_APP_URL} \n\n Děkujeme \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
-        break;
-      default:
-        message = `You have been invited to ${process.env.NEXT_PUBLIC_APP_NAME} \n\n Your username is: ${email} \n\n Your password is: ${password} \n\n Please login to ${process.env.NEXT_PUBLIC_APP_URL} \n\n Thank you \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
-        break;
-    }
+    // Sistema configurado apenas para Português do Brasil
+    const message = `Você foi convidado para ${process.env.NEXT_PUBLIC_APP_NAME}! \n\n Seu nome de usuário é: ${email} \n\n Sua senha é: ${password} \n\n Por favor, faça login em ${process.env.NEXT_PUBLIC_APP_URL} \n\n Obrigado! \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
 
     //Check if user already exists in local database
     const checkexisting = await prismadb.users.findFirst({

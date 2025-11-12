@@ -45,15 +45,8 @@ export async function getAiReport(session: any, boardId: string) {
     2
   )}.`;
 
-  switch (user.userLanguage) {
-    case "en":
-      prompt = prompt + `Response must be in English language and MDX format.`;
-
-      break;
-    case "cz":
-      prompt = prompt + `Odpověď musí být v českém jazyce a ve formátu MDX.`;
-      break;
-  }
+  // Sistema configurado apenas para Português
+  prompt = prompt + `A resposta deve estar em português do Brasil e em formato MDX.`;
 
   if (!prompt) return { message: "No prompt found" };
 
