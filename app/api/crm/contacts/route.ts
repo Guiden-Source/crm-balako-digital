@@ -45,7 +45,7 @@ export async function GET(req: Request) {
         assigned_accounts: true,
       },
       orderBy: {
-        createdAt: "desc",
+        cratedAt: "desc",
       },
     });
 
