@@ -1,7 +1,8 @@
 "use client";
 
-import { columns } from "@/app/[locale]/(routes)/documents/components/columns";
-import { DocumentsDataTable } from "@/app/[locale]/(routes)/documents/components/data-table";
+// Temporariamente desabilitado - módulo de documentos removido
+// import { columns } from "@/app/[locale]/(routes)/documents/components/columns";
+// import { DocumentsDataTable } from "@/app/[locale]/(routes)/documents/components/data-table";
 
 import {
   Card,
@@ -36,24 +37,19 @@ const DocumentsView = ({ data }: DocumentsViewProps) => {
       <CardHeader className="pb-3">
         <div className="flex justify-between">
           <div>
-            <CardTitle
-              onClick={() => router.push("/documents")}
-              className="cursor-pointer"
-            >
-              Documents
+            <CardTitle className="cursor-pointer">
+              Documentos
             </CardTitle>
-            <CardDescription></CardDescription>
+            <CardDescription>Módulo em desenvolvimento</CardDescription>
           </div>
           <div className="flex space-x-2"></div>
         </div>
         <Separator />
       </CardHeader>
       <CardContent>
-        {!data || data.length === 0 ? (
-          "No assigned documents found"
-        ) : (
-          <DocumentsDataTable data={data} columns={columns} />
-        )}
+        <p className="text-sm text-muted-foreground">
+          Nenhum documento encontrado. Este módulo será implementado em breve.
+        </p>
       </CardContent>
     </Card>
   );
