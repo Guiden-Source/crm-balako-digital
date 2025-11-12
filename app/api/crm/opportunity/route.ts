@@ -71,14 +71,8 @@ export async function POST(req: Request) {
       await sendEmail({
         from: process.env.EMAIL_FROM as string,
         to: notifyRecipient.email || "info@softbase.cz",
-        subject:
-          notifyRecipient.userLanguage === "en"
-            ? `New opportunity ${name} has been added to the system and assigned to you.`
-            : `Nová příležitost ${name} byla přidána do systému a přidělena vám.`,
-        text:
-          notifyRecipient.userLanguage === "en"
-            ? `New opportunity ${name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newOpportunity.id}`
-            : `Nová příležitost ${name} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newOpportunity.id}`,
+        subject: `Nova oportunidade ${name} foi adicionada ao sistema e atribuída a você.`,
+        text: `Nova oportunidade ${name} foi adicionada ao sistema e atribuída a você. Você pode ver os detalhes aqui: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newOpportunity.id}`,
       });
     }
 
