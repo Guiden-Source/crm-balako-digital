@@ -2,7 +2,7 @@ import { getTask } from "@/actions/projects/get-task";
 import React from "react";
 import moment from "moment";
 
-import { getDocuments } from "@/actions/documents/get-documents";
+// import { getDocuments } from "@/actions/documents/get-documents";
 import { getTaskComments } from "@/actions/projects/get-task-comments";
 import { getTaskDocuments } from "@/actions/projects/get-task-documents";
 
@@ -43,7 +43,8 @@ const TaskPage = async (props: TaskPageProps) => {
   const { taskId } = params;
   const task: any = await getTask(taskId);
   const taskDocuments: any = await getTaskDocuments(taskId);
-  const documents: any = await getDocuments();
+  // const documents: any = await getDocuments();
+  const documents: any = []; // Módulo documents temporariamente desabilitado
   const comments: any = await getTaskComments(taskId);
   const activeUsers: any = await getActiveUsers();
   const boards = await getBoards(user?.id!);

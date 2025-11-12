@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-import { getDocuments } from "@/actions/documents/get-documents";
+// import { getDocuments } from "@/actions/documents/get-documents";
 import { getTaskComments } from "@/actions/projects/get-task-comments";
 import { getTaskDocuments } from "@/actions/projects/get-task-documents";
 
@@ -25,7 +25,8 @@ const CRMTaskPage = async (props: TaskPageProps) => {
   const { taskId } = params;
   const task: any = await getCrMTask(taskId);
   const taskDocuments: any = await getTaskDocuments(taskId);
-  const documents: any = await getDocuments();
+  // const documents: any = await getDocuments();
+  const documents: any = []; // Módulo documents temporariamente desabilitado
   //Info: This is the same as the one in the CRM task page
   const comments: any = await getTaskComments(taskId);
 
