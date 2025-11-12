@@ -26,7 +26,7 @@ import LoadingModal from "@/components/modals/loading-modal";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 
-import { NewOpportunityForm } from "../../opportunities/components/NewOpportunityForm";
+// import { NewOpportunityForm } from "../../opportunities/components/NewOpportunityForm";
 import { set } from "cypress/types/lodash";
 import { setInactiveOpportunity } from "@/actions/crm/opportunity/dashboard/set-inactive";
 import {
@@ -148,7 +148,8 @@ const CRMKanban = ({
 
       <Dialog open={isDialogOpen} onOpenChange={() => setIsDialogOpen(false)}>
         <DialogContent className="min-w-[1000px] py-10 overflow-auto ">
-          <NewOpportunityForm
+          <div className="p-4">Nova Oportunidade - Módulo em desenvolvimento</div>
+          {/* <NewOpportunityForm
             users={users}
             accounts={accounts}
             contacts={contacts}
@@ -157,7 +158,7 @@ const CRMKanban = ({
             campaigns={campaigns}
             selectedStage={selectedStage}
             onDialogClose={() => setIsDialogOpen(false)}
-          />
+          /> */}
         </DialogContent>
       </Dialog>
 
