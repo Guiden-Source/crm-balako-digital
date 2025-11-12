@@ -90,12 +90,12 @@ export function CommandComponent() {
             </CommandItem>
             <CommandItem onClick={() => redirect("/profile")}>
               <Settings className="mr-2 h-4 w-4" />
-              <span>Profile settings</span>
+              <span>Configurações de Perfil</span>
               <CommandShortcut>Shift + ⌘ + P</CommandShortcut>
             </CommandItem>
             <CommandItem onClick={() => signOut()}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Logout</span>
+              <span>Sair</span>
               <CommandShortcut>⌘k</CommandShortcut>
             </CommandItem>
           </CommandGroup>

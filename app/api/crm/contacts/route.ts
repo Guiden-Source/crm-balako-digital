@@ -3,14 +3,92 @@ import { prismadb } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import sendEmail from "@/lib/sendmail";
+import { getRoleBasedFilters, isAgency, getUserRole } from "@/lib/auth-helpers";
+
+//Get all contacts route - with role-based filtering
+export async function GET(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    // Verificar autenticação
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Unauthorized", message: "Você precisa estar autenticado para acessar este recurso" },
+        { status: 401 }
+      );
+    }
+
+    const userRole = getUserRole(session);
+    console.log(`[GET_CONTACTS] User role: ${userRole}, User ID: ${session.user.id}`);
+
+    // Aplicar filtros baseados no role
+    const roleFilters = getRoleBasedFilters(session);
+
+    const contacts = await prismadb.crm_Contacts.findMany({
+      where: {
+        ...roleFilters, // Se client, filtra por ownerId automaticamente
+      },
+      include: {
+        assigned_to_user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        crate_by_user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        assigned_accounts: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    // Log para debug
+    if (isAgency(session)) {
+      console.log(`[GET_CONTACTS] Agency view - returned ${contacts.length} contacts`);
+    } else {
+      console.log(`[GET_CONTACTS] Client view - returned ${contacts.length} contacts for user ${session.user.id}`);
+    }
+
+    return NextResponse.json(
+      {
+        contacts,
+        meta: {
+          total: contacts.length,
+          role: userRole,
+        },
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("[GET_CONTACTS_ERROR]", error);
+    return NextResponse.json(
+      { error: "Internal Server Error", message: "Erro ao buscar contatos" },
+      { status: 500 }
+    );
+  }
+}
 
 //Create route
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
-  }
   try {
+    const session = await getServerSession(authOptions);
+
+    // Verificar autenticação
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Unauthorized", message: "Você precisa estar autenticado para criar contatos" },
+        { status: 401 }
+      );
+    }
+
+    const userRole = getUserRole(session);
     const body = await req.json();
     const userId = session.user.id;
 
@@ -108,25 +186,38 @@ export async function POST(req: Request) {
       });
     }
 
+    console.log(`[CREATE_CONTACT] Created by user ${userId} with role: ${userRole}`);
     return NextResponse.json({ newContact }, { status: 200 });
   } catch (error) {
-    console.log("[NEW_CONTACT_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.error("[NEW_CONTACT_POST]", error);
+    return NextResponse.json(
+      { error: "Internal Server Error", message: "Erro ao criar contato" },
+      { status: 500 }
+    );
   }
 }
 
 //Update route
 export async function PUT(req: Request) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
-  }
   try {
+    const session = await getServerSession(authOptions);
+
+    // Verificar autenticação
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Unauthorized", message: "Você precisa estar autenticado para atualizar contatos" },
+        { status: 401 }
+      );
+    }
     const body = await req.json();
     const userId = session.user.id;
+    const userRole = getUserRole(session);
 
     if (!body) {
-      return new NextResponse("No form data", { status: 400 });
+      return NextResponse.json(
+        { error: "Bad Request", message: "Dados do formulário não fornecidos" },
+        { status: 400 }
+      );
     }
 
     const {
@@ -156,6 +247,30 @@ export async function PUT(req: Request) {
     } = body;
 
     console.log(assigned_account, "assigned_account");
+
+    // Verificar se o contato existe
+    const existingContact = await prismadb.crm_Contacts.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        assigned_to: true,
+      },
+    });
+
+    if (!existingContact) {
+      return NextResponse.json(
+        { error: "Not Found", message: "Contato não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    // Verificar permissão - clientes só podem editar seus próprios contatos
+    if (!isAgency(session) && existingContact.assigned_to !== userId) {
+      return NextResponse.json(
+        { error: "Forbidden", message: "Você não tem permissão para editar este contato" },
+        { status: 403 }
+      );
+    }
 
     const newContact = await prismadb.crm_Contacts.update({
       where: {
@@ -225,9 +340,81 @@ export async function PUT(req: Request) {
       });
     } */
 
+    console.log(`[UPDATE_CONTACT] Updated by user ${userId} with role: ${userRole}`);
     return NextResponse.json({ newContact }, { status: 200 });
   } catch (error) {
-    console.log("UPDATE_CONTACT_PUT]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.error("[UPDATE_CONTACT_PUT]", error);
+    return NextResponse.json(
+      { error: "Internal Server Error", message: "Erro ao atualizar contato" },
+      { status: 500 }
+    );
+  }
+}
+
+//Delete route - ONLY for agencies
+export async function DELETE(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    // Verificar autenticação
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "Unauthorized", message: "Você precisa estar autenticado para deletar contatos" },
+        { status: 401 }
+      );
+    }
+
+    // Apenas agências podem deletar contatos
+    if (!isAgency(session)) {
+      return NextResponse.json(
+        {
+          error: "Forbidden",
+          message: "Apenas agências têm permissão para deletar contatos",
+        },
+        { status: 403 }
+      );
+    }
+
+    const { searchParams } = new URL(req.url);
+    const contactId = searchParams.get("id");
+
+    if (!contactId) {
+      return NextResponse.json(
+        { error: "Bad Request", message: "ID do contato não fornecido" },
+        { status: 400 }
+      );
+    }
+
+    // Verificar se o contato existe
+    const existingContact = await prismadb.crm_Contacts.findUnique({
+      where: { id: contactId },
+    });
+
+    if (!existingContact) {
+      return NextResponse.json(
+        { error: "Not Found", message: "Contato não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    // Deletar contato
+    await prismadb.crm_Contacts.delete({
+      where: { id: contactId },
+    });
+
+    console.log(
+      `[DELETE_CONTACT] Contact ${contactId} deleted by agency user ${session.user.id}`
+    );
+
+    return NextResponse.json(
+      { success: true, message: "Contato deletado com sucesso" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("[DELETE_CONTACT_ERROR]", error);
+    return NextResponse.json(
+      { error: "Internal Server Error", message: "Erro ao deletar contato" },
+      { status: 500 }
+    );
   }
 }

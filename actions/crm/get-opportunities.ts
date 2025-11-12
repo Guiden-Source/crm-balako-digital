@@ -1,84 +1,70 @@
 import { prismadb } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { getRoleBasedFilters } from "@/lib/auth-helpers";
 
+/**
+ * Busca todas as oportunidades com filtros baseados no role do usuário
+ * 
+ * - Agency: retorna TODAS as oportunidades
+ * - Client: retorna APENAS as oportunidades onde ownerId === user.id
+ * - Não autenticado: retorna array vazio
+ */
 export const getOpportunities = async () => {
-  const data = await prismadb.crm_Opportunities.findMany({
-    include: {
-      assigned_to_user: {
-        select: {
-          avatar: true,
-          name: true,
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user) {
+      console.warn("[GET_OPPORTUNITIES_ACTION] Unauthenticated access attempt");
+      return [];
+    }
+
+    // Aplicar filtros baseados no role
+    const roleFilters = getRoleBasedFilters(session);
+
+    const data = await prismadb.crm_Opportunities.findMany({
+      where: {
+        ...roleFilters,
+      },
+      include: {
+        assigned_account: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        assigned_sales_stage: {
+          select: {
+            id: true,
+            name: true,
+            probability: true,
+            value: true,
+          },
+        },
+        assigned_to_user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        contacts: {
+          select: {
+            id: true,
+            first_name: true,
+            last_name: true,
+            email: true,
+          },
         },
       },
-    },
-  });
-  return data;
-};
-
-//Get opportunities by month for chart
-export const getOpportunitiesByMonth = async () => {
-  const opportunities = await prismadb.crm_Opportunities.findMany({
-    select: {
-      created_on: true,
-    },
-  });
-
-  if (!opportunities) {
-    return {};
-  }
-
-  const opportunitiesByMonth = opportunities.reduce(
-    (acc: any, opportunity: any) => {
-      const month = new Date(opportunity.created_on).toLocaleString("default", {
-        month: "long",
-      });
-      acc[month] = (acc[month] || 0) + 1;
-      return acc;
-    },
-    {}
-  );
-
-  const chartData = Object.keys(opportunitiesByMonth).map((month: any) => {
-    return {
-      name: month,
-      Number: opportunitiesByMonth[month],
-    };
-  });
-
-  return chartData;
-};
-
-//Get opportunities by sales_stage name for chart
-export const getOpportunitiesByStage = async () => {
-  const opportunities = await prismadb.crm_Opportunities.findMany({
-    select: {
-      assigned_sales_stage: {
-        select: {
-          name: true,
-        },
+      orderBy: {
+        cratedAt: "desc",
       },
-    },
-  });
+    });
 
-  console.log(opportunities, "opportunities");
-  if (!opportunities) {
-    return {};
+    return data;
+  } catch (error) {
+    console.error("[GET_OPPORTUNITIES_ACTION_ERROR]", error);
+    return [];
   }
-
-  const opportunitiesByStage = opportunities.reduce(
-    (acc: any, opportunity: any) => {
-      const stage = opportunity.assigned_sales_stage?.name;
-      acc[stage] = (acc[stage] || 0) + 1;
-      return acc;
-    },
-    {}
-  );
-
-  const chartData = Object.keys(opportunitiesByStage).map((stage: any) => {
-    return {
-      name: stage,
-      Number: opportunitiesByStage[stage],
-    };
-  });
-
-  return chartData;
 };

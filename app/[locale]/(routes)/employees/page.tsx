@@ -8,10 +8,10 @@ type Props = {};
 const CrmPage = (props: Props) => {
   return (
     <Container
-      title="Employees"
-      description={"Everything you need to know about Human Resources"}
+      title="Funcionários"
+      description="Tudo que você precisa saber sobre Recursos Humanos"
     >
-      <div>Module content here</div>
+      <div>Conteúdo do módulo aqui</div>
     </Container>
   );
 };

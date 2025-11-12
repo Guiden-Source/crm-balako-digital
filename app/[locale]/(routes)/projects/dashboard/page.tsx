@@ -7,7 +7,6 @@ import { getBoards } from "@/actions/projects/get-boards";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getSections } from "@/actions/projects/get-sections";
-import { Sections } from "@prisma/client";
 
 const ProjectDashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -15,7 +14,7 @@ const ProjectDashboard = async () => {
   const dashboardData: any = await getTasksPastDue();
   const activeUsers: any = await getActiveUsers();
   const boards = await getBoards(user?.id!);
-  const sections: Sections[] = await getSections();
+  const sections = await getSections();
 
   if (!dashboardData) {
     return <div>DashBoard data not found</div>;
@@ -23,10 +22,8 @@ const ProjectDashboard = async () => {
 
   return (
     <Container
-      title="Dashboard"
-      description={
-        "Welcome to NextCRM cockpit, here you can see your company overview"
-      }
+      title="Dashboard de Projetos"
+      description="Visão geral dos seus projetos e tarefas"
     >
       <ProjectDashboardCockpit
         dashboardData={dashboardData}

@@ -14,11 +14,11 @@ const AdminModulesPage = async () => {
   if (!session?.user?.isAdmin) {
     return (
       <Container
-        title="Administration"
-        description="You are not admin, access not allowed"
+        title="Administração"
+        description="Você não é administrador, acesso não permitido"
       >
         <div className="flex w-full h-full items-center justify-center">
-          Access not allowed
+          Acesso não permitido
         </div>
       </Container>
     );
@@ -27,8 +27,8 @@ const AdminModulesPage = async () => {
   const modules: any = await getModules();
   return (
     <Container
-      title="Modules administration"
-      description={"Here you can manage your NextCRM modules"}
+      title="Administração de Módulos"
+      description="Aqui você pode gerenciar os módulos do Balako Digital CRM"
     >
       <DataTable columns={columns} data={modules} search="name" />
     </Container>

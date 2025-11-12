@@ -10,8 +10,8 @@ const ContractsPage = async () => {
   const contracts = await getContractsWithIncludes();
   return (
     <Container
-      title="Contracts"
-      description={"Everything you need to know about your contracts"}
+      title="Contratos"
+      description="Tudo que você precisa saber sobre seus contratos"
     >
       <Suspense fallback={<SuspenseLoading />}>
         <ContractsView crmData={crmData} data={contracts} />

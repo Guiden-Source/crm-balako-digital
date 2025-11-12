@@ -18,14 +18,43 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Balako Digital Brand Colors
+        balako: {
+          primary: "#21808D", // Teal principal
+          secondary: "#F59E0B", // Laranja secundária
+          teal: {
+            50: "#f0fdfa",
+            100: "#ccfbf1",
+            200: "#99f6e4",
+            300: "#5eead4",
+            400: "#2dd4bf",
+            500: "#21808D", // Primary
+            600: "#1a6b76",
+            700: "#14535c",
+            800: "#0f4249",
+            900: "#0a2f34",
+          },
+          orange: {
+            50: "#fff7ed",
+            100: "#ffedd5",
+            200: "#fed7aa",
+            300: "#fdba74",
+            400: "#fb923c",
+            500: "#F59E0B", // Secondary
+            600: "#ea580c",
+            700: "#c2410c",
+            800: "#9a3412",
+            900: "#7c2d12",
+          },
+        },
         //Tremor theme
         tremor: {
           brand: {
-            faint: "#eff6ff", // blue-50
-            muted: "#bfdbfe", // blue-200
-            subtle: "#60a5fa", // blue-400
-            DEFAULT: "#3b82f6", // blue-500
-            emphasis: "#1d4ed8", // blue-700
+            faint: "#f0fdfa", // teal-50
+            muted: "#99f6e4", // teal-200
+            subtle: "#2dd4bf", // teal-400
+            DEFAULT: "#21808D", // Balako primary
+            emphasis: "#14535c", // teal-700
             inverted: "#ffffff", // white
           },
           background: {
@@ -51,11 +80,11 @@ module.exports = {
         // dark mode
         "dark-tremor": {
           brand: {
-            faint: "#0B1229", // custom
-            muted: "#172554", // blue-950
-            subtle: "#1e40af", // blue-800
-            DEFAULT: "#3b82f6", // blue-500
-            emphasis: "#60a5fa", // blue-400
+            faint: "#0a2f34", // teal-900
+            muted: "#0f4249", // teal-800
+            subtle: "#14535c", // teal-700
+            DEFAULT: "#21808D", // Balako primary
+            emphasis: "#2dd4bf", // teal-400
             inverted: "#030712", // gray-950
           },
           background: {

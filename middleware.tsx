@@ -1,8 +1,9 @@
 import createMiddleware from "next-intl/middleware";
 
 export default createMiddleware({
-  locales: ["en", "de", "cz", "uk"],
-  defaultLocale: "en",
+  locales: ["pt"],
+  defaultLocale: "pt",
+  localePrefix: "never", // Remove o prefixo /pt das URLs
 });
 
 export const config = {

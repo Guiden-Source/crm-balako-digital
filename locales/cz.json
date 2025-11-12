@@ -1,26 +1,24 @@
 {
   "RootLayout": {
-    "title": "NextCRM",
-    "description": "NextCRM je open source CRM vytvořené na frameworku NextJS."
+    "title": "Balako Digital CRM",
+    "description": "CRM para agências de marketing digital com automação via WhatsApp"
   },
   "ModuleMenu": {
-    "dashboard": "Přehled",
+    "dashboard": "Dashboard",
+    "contacts": "Contatos",
+    "followups": "Follow-ups",
+    "whatsapp": "WhatsApp",
+    "settings": "Configurações",
     "crm": {
       "title": "Obchod",
       "accounts": "Firmy",
-      "opportunities": "Obchody",
       "contacts": "Kontakty",
       "leads": "Leady",
       "contracts": "Smlouvy"
     },
     "projects": "Projekty",
     "emails": "Pošta",
-    "tasks": "Úkoly",
-    "invoices": "Faktury",
-    "reports": "Reporty",
-    "documents": "Dokumenty",
-    "storage": "Úložiště",
-    "settings": "Nastavení"
+    "tasks": "Úkoly"
   },
   "DashboardPage": {
     "containerTitle": "Přehled",
@@ -29,15 +27,11 @@
     "expectedRevenue": "Očekávaný obrat",
     "activeUsers": "Aktivní uživatelé",
     "accounts": "Firmy",
-    "opportunities": "Obchody",
     "contacts": "Kontakty",
     "leads": "Leady",
     "projects": "Projekty",
     "tasks": "Úkoly",
-    "myTasks": "Moje úkoly",
-    "invoices": "Faktury",
-    "documents": "Dokumenty",
-    "storage": "Úložiště"
+    "myTasks": "Moje úkoly"
   },
   "RegisterComponent": {
     "cardTitle": "Vytvořit nový účet",

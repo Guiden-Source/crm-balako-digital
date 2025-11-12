@@ -22,20 +22,20 @@ const UserCRMDashboard = async () => {
   return (
     <div>
       <Container
-        title={`${session.user.name} | CRM Dashboard (in-progress) `}
-        description="Your sales data in one place"
+        title={`${session.user.name} | Dashboard CRM (em desenvolvimento)`}
+        description="Seus dados de vendas em um só lugar"
       >
         <div className="grid grid-cols-2 w-full ">
-          <div className="">Calls overview</div>
+          <div className="">Visão Geral de Ligações</div>
           <div className="">
-            <h1>Tasks in Accounts</h1>
+            <h1>Tarefas nas Empresas</h1>
             <pre>{JSON.stringify(task, null, 2)}</pre>
           </div>
-          <div className="">Meetings overview</div>
+          <div className="">Visão Geral de Reuniões</div>
           <div className="">
             <h1></h1>
           </div>
-          <div className="">Leads overview</div>
+          <div className="">Visão Geral de Leads</div>
           <div className="">
             <h1></h1>
           </div>

@@ -1,43 +1,37 @@
 {
   "RootLayout": {
-    "title": "NextCRM",
-    "description": "NextCRM is an open source CRM build on top of NextJS."
+    "title": "Balako Digital CRM",
+    "description": "CRM para agências de marketing digital com automação via WhatsApp"
   },
   "ModuleMenu": {
     "dashboard": "Dashboard",
+    "contacts": "Contatos",
+    "followups": "Follow-ups",
+    "whatsapp": "WhatsApp",
+    "settings": "Configurações",
     "crm": {
       "title": "Sales",
       "accounts": "Companies",
-      "opportunities": "Opportunities",
       "contacts": "Contacts",
       "leads": "Leads",
       "contracts": "Contracts"
     },
     "projects": "Projects",
     "emails": "E-mails",
-    "tasks": "Tasks",
-    "invoices": "Invoices",
-    "reports": "Reports",
-    "documents": "Documents",
-    "storage": "Storage",
-    "settings": "Administration"
+    "tasks": "Tasks"
   },
   "DashboardPage": {
     "containerTitle": "Dashboard",
     "totalRevenue": "Total revenue",
-    "containerDescription": "Welcome to NextCRM, here you can see all important information about your business.",
+    "containerDescription": "Welcome to Balako Digital CRM, here you can see all important information about your business.",
     "expectedRevenue": "Expected revenue",
     "activeUsers": "Active users",
     "accounts": "Companies",
-    "opportunities": "Deals",
     "contacts": "Contacts",
     "leads": "Leads",
     "projects": "Projects",
     "tasks": "Tasks",
-    "myTasks": "My tasks",
-    "invoices": "Invoices",
-    "documents": "Documents",
-    "storage": "Storage"
+    "myTasks": "My tasks"
   },
   "RegisterComponent": {
     "cardTitle": "Create new account",

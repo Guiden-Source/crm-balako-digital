@@ -15,11 +15,11 @@ const AdminPage = async () => {
   if (!user?.is_admin) {
     return (
       <Container
-        title="Administration"
-        description="You are not admin, access not allowed"
+        title="Administração"
+        description="Você não é administrador, acesso não permitido"
       >
         <div className="flex w-full h-full items-center justify-center">
-          Access not allowed
+          Acesso não permitido
         </div>
       </Container>
     );
@@ -27,15 +27,15 @@ const AdminPage = async () => {
 
   return (
     <Container
-      title="Administration"
-      description={"Here you can setup your NextCRM instance"}
+      title="Administração"
+      description="Aqui você pode configurar sua instância do Balako Digital CRM"
     >
       <div className="space-x-2">
         <Button asChild>
-          <Link href="/admin/users">Users administration</Link>
+          <Link href="/admin/users">Administração de Usuários</Link>
         </Button>
         <Button asChild>
-          <Link href="/admin/modules">Modules administration</Link>
+          <Link href="/admin/modules">Administração de Módulos</Link>
         </Button>
       </div>
       <div className="flex flex-row flex-wrap space-y-2 md:space-y-0 gap-2">

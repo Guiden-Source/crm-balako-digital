@@ -11,11 +11,11 @@ const TasksPage = async () => {
 
   return (
     <Container
-      title="All tasks"
-      description={"Everything you need to know about tasks"}
+      title="Todas as Tarefas"
+      description="Tudo que você precisa saber sobre suas tarefas"
     >
       <div className="py-5">
-        <Button>New task</Button>
+        <Button>Nova Tarefa</Button>
       </div>
       <div>
         <TasksDataTable data={tasks} columns={columns} />

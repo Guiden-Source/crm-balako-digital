@@ -81,28 +81,28 @@ export default async function RootLayout(props: Props) {
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1"
         />
-        <meta property="og:url" content="https://www.nextcrm.io" />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="NextCRM" />
+        <meta property="og:title" content="Balako Digital CRM" />
         <meta
           property="og:description"
-          content="NextCRM is an open source CRM build on top of NextJS. Technology stack: NextJS with Typescrtipt, MongoDB, TailwindCSS, React, Prisma, shadCN, resend.com, react.email and more."
+          content="CRM para agências de marketing digital com automação via WhatsApp. Gerencie múltiplos clientes, envie mensagens automatizadas e acompanhe todas as interações em um só lugar."
         />
-        <meta property="og:image" content="https://nextcrm.io/api/og" />
+        <meta property="og:image" content="/images/balako-logo-svg4.svg" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="nextcrm.io" />
-        <meta property="twitter:url" content="https://www.nextcrm.io" />
-        <meta name="twitter:title" content="NextCRM" />
+        <meta property="twitter:domain" content="balakodigital.com" />
+        <meta property="twitter:url" content={process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"} />
+        <meta name="twitter:title" content="Balako Digital CRM" />
         <meta
           name="twitter:description"
-          content="NextCRM is an open source CRM build on top of NextJS. Technology stack: NextJS with Typescrtipt, MongoDB, TailwindCSS, React, Prisma, shadCN, resend.com, react.email and more."
+          content="CRM para agências de marketing digital com automação via WhatsApp. Gerencie múltiplos clientes, envie mensagens automatizadas e acompanhe todas as interações em um só lugar."
         />
-        <meta name="twitter:image" content="https://nextcrm.io/api/og" />
+        <meta name="twitter:image" content="/images/balako-logo-svg4.svg" />
       </head>
       <body className={inter.className + " min-h-screen"}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>

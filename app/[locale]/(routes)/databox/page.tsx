@@ -9,11 +9,9 @@ const CrmPage = (props: Props) => {
   return (
     <Container
       title="Databox"
-      description={
-        "Everything you need to know about Databox alias Datové schránky"
-      }
+      description="Tudo que você precisa saber sobre Databox"
     >
-      <div>Module content here</div>
+      <div>Conteúdo do módulo aqui</div>
     </Container>
   );
 };

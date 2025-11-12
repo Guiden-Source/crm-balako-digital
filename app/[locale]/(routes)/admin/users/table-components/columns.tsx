@@ -73,13 +73,35 @@ export const columns: ColumnDef<AdminUser>[] = [
     enableHiding: true,
   },
   {
+    accessorKey: "role",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Tipo" />
+    ),
+    cell: ({ row }) => {
+      const role = row.getValue("role") as string;
+      return (
+        <div className="flex items-center">
+          <span className={`px-2 py-1 rounded-md text-xs font-medium ${
+            role === 'agency' 
+              ? 'bg-[#21808D]/10 text-[#21808D] border border-[#21808D]/20' 
+              : 'bg-gray-100 text-gray-700 border border-gray-200'
+          }`}>
+            {role === 'agency' ? '👑 Agência' : '👤 Cliente'}
+          </span>
+        </div>
+      );
+    },
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
     accessorKey: "is_admin",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Admin" />
     ),
 
     cell: ({ row }) => (
-      <div className="">{row.original.is_admin ? "Enable" : "Disable"}</div>
+      <div className="">{row.original.is_admin ? "Ativado" : "Desativado"}</div>
     ),
     enableSorting: true,
     enableHiding: true,

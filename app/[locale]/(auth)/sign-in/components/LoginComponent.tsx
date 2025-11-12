@@ -86,24 +86,6 @@ export function LoginComponent() {
     }
   };
 
-  const loginWithGitHub = async () => {
-    setIsLoading(true);
-    try {
-      await signIn("github", {
-        callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
-        //callbackUrl: "/",
-      });
-    } catch (error) {
-      console.log(error, "error");
-      toast({
-        variant: "destructive",
-        description:
-          "Something went wrong while logging with your Google account.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
   //Login with username(email)/password
   async function onSubmit(data: LoginFormValues) {
     setIsLoading(true);
@@ -172,11 +154,7 @@ export function LoginComponent() {
         <CardDescription>Click here to login with: </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className="grid grid-cols-2 gap-6">
-          <Button variant="outline" onClick={loginWithGitHub}>
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-            Github
-          </Button>
+        <div className="grid gap-6">
           <Button
             variant="outline"
             onClick={loginWithGoogle}
@@ -196,7 +174,7 @@ export function LoginComponent() {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
+              Ou continue com
             </span>
           </div>
         </div>
@@ -272,13 +250,13 @@ export function LoginComponent() {
       </CardContent>
       <CardFooter className="flex flex-col space-y-5">
         <div className="text-sm text-gray-500">
-          Need account? Register{" "}
+          Precisa de uma conta? Registre-se{" "}
           <Link href={"/register"} className="text-blue-500">
-            here
+            aqui
           </Link>
         </div>
         <div className="text-sm text-gray-500">
-          Need password reset? Click
+          Precisa resetar a senha? Clique
           {/* Dialog start */}
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger className="text-blue-500">
@@ -286,10 +264,9 @@ export function LoginComponent() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="p-5">Password Reset</DialogTitle>
+                <DialogTitle className="p-5">Resetar Senha</DialogTitle>
                 <DialogDescription className="p-5">
-                  Enter your email address and we will send new password to your
-                  e-mail.
+                  Digite seu endereço de e-mail e enviaremos uma nova senha.
                 </DialogDescription>
               </DialogHeader>
               {isLoading ? (
@@ -307,12 +284,12 @@ export function LoginComponent() {
                       onPasswordReset(email);
                     }}
                   >
-                    Reset
+                    Resetar
                   </Button>
                 </div>
               )}
               <DialogTrigger className="w-full text-right pt-5 ">
-                <Button variant={"destructive"}>Cancel</Button>
+                <Button variant={"destructive"}>Cancelar</Button>
               </DialogTrigger>
             </DialogContent>
           </Dialog>

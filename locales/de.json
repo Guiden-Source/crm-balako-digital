@@ -1,26 +1,24 @@
 {
   "RootLayout": {
-    "title": "NextCRM",
-    "description": "Willkommen bei NextCRM CRM mit Prisma und Next.js 13"
+    "title": "Balako Digital CRM",
+    "description": "CRM para agências de marketing digital com automação via WhatsApp"
   },
   "ModuleMenu": {
     "dashboard": "Dashboard",
+    "contacts": "Contatos",
+    "followups": "Follow-ups",
+    "whatsapp": "WhatsApp",
+    "settings": "Configurações",
     "crm": {
       "title": "Handel",
       "accounts": "Firmen",
-      "opportunities": "Möglichkeiten",
       "contacts": "Kontakte",
       "leads": "Leads",
       "contracts": "Verträge"
     },
     "projects": "Projekte",
     "emails": "E-Mails",
-    "tasks": "Aufgaben",
-    "invoices": "Rechnungen",
-    "reports": "Berichte",
-    "documents": "Dokumente",
-    "storage": "Speicher",
-    "settings": "Einstellungen"
+    "tasks": "Aufgaben"
   },
   "DashboardPage": {
     "containerTitle": "Dashboard",
@@ -29,15 +27,11 @@
     "expectedRevenue": "Erwarteter Umsatz",
     "activeUsers": "Aktive Benutzer",
     "accounts": "Unternehmen",
-    "opportunities": "Angebote",
     "contacts": "Kontakte",
     "leads": "Leads",
     "projects": "Projekte",
     "tasks": "Aufgaben",
-    "myTasks": "Meine Aufgaben",
-    "invoices": "Rechnungen",
-    "documents": "Dokumente",
-    "storage": "Speicher"
+    "myTasks": "Meine Aufgaben"
   },
   "RegisterComponent": {
     "cardTitle": "Neuen Account erstellen",

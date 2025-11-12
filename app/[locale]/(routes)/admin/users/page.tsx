@@ -8,23 +8,22 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { AdminUserDataTable } from "./table-components/data-table";
 import { columns } from "./table-components/columns";
-import { Users } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import SendMailToAll from "./components/send-mail-to-all";
 
 const AdminUsersPage = async () => {
-  const users: Users[] = await getUsers();
+  const users = await getUsers();
 
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.isAdmin) {
     return (
       <Container
-        title="Administration"
-        description="You are not admin, access not allowed"
+        title="Administração"
+        description="Você não é administrador, acesso não permitido"
       >
         <div className="flex w-full h-full items-center justify-center">
-          Access not allowed
+          Acesso não permitido
         </div>
       </Container>
     );
@@ -32,12 +31,12 @@ const AdminUsersPage = async () => {
 
   return (
     <Container
-      title="Users administration"
-      description={"Here you can manage your NextCRM users"}
+      title="Administração de Usuários"
+      description="Gerencie os usuários do Balako Digital CRM"
     >
       <div className="flex-col1">
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Invite new user to NextCRM
+          Convidar novo usuário para o Balako Digital CRM
         </h4>
         <InviteForm />
       </div>

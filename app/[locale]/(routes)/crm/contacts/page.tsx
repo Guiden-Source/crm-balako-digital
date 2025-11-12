@@ -12,8 +12,8 @@ const AccountsPage = async () => {
   const contacts = await getContacts();
   return (
     <Container
-      title="Contacts"
-      description={"Everything you need to know about your contacts"}
+      title="Contatos"
+      description="Tudo que você precisa saber sobre seus contatos"
     >
       <Suspense fallback={<SuspenseLoading />}>
         <ContactsView crmData={crmData} data={contacts} />

@@ -28,44 +28,44 @@ const SecondBrainPage = async () => {
     return (
       <div>
         <H4Title>
-          Notions are not enable. Please enable it in your profile
+          Notion não está habilitado. Por favor, habilite em seu perfil
         </H4Title>
 
         <div>
-          Here is how to enable it:
-          <ol>1. Register and login to Notion.so</ol>
+          Como habilitar:
+          <ol>1. Registre-se e faça login no Notion.so</ol>
           <ol>
-            2. Create (Click on duplicate) new database from this source -{" "}
+            2. Crie (Clique em duplicar) um novo banco de dados desta fonte -{" "}
             <Link href="http://abdulhadeahmad.notion.site/87bfd5b5862e425d82de6ce47c88a2d4">
               http://abdulhadeahmad.notion.site/87bfd5b5862e425d82de6ce47c88a2d4
             </Link>
           </ol>
           <ol>
-            3. Create NextCRM integration in Notion (
+            3. Crie uma integração Balako CRM no Notion (
             <a href="https://www.notion.so/my-integrations">
               https://www.notion.so/my-integrations
             </a>
-            ) and connect new integration with your database by click on ...
-            (three dots on top right corner of database), find your newly
-            created integration and click on it
+            ) e conecte a nova integração com seu banco de dados clicando em ...
+            (três pontos no canto superior direito do banco de dados), encontre sua 
+            integração recém-criada e clique nela
           </ol>
-          <ol>4. Copy integration token</ol>
+          <ol>4. Copie o token de integração</ol>
           <ol>
-            5. Paste integration token to your{" "}
+            5. Cole o token de integração em seu{" "}
             <Link href={"/profile"} className="text-blue-500">
-              profile
+              perfil
             </Link>
           </ol>
           <ol>
-            6. Copy Notion DB ID (it is first string in URL it is red in
-            example) - (https://www.notion.so/
+            6. Copie o ID do BD Notion (é a primeira string na URL, está em vermelho no
+            exemplo) - (https://www.notion.so/
             <span className="text-red-500">
               2e5524886ae743ae8c2e47b9a39df133
             </span>
             ?v=e563b6c36b6649bba29eaad6b4c52ab4)
           </ol>
           <Button asChild className="my-3">
-            <Link href="/profile">Enable Second Brain </Link>
+            <Link href="/profile">Habilitar Second Brain</Link>
           </Button>
         </div>
         <div className="w-full ">
@@ -79,7 +79,7 @@ const SecondBrainPage = async () => {
       <NewTask users={users} boards={boards} />
       <Container
         title="Second Brain"
-        description={"Everything you need to know about Your notions"}
+        description="Tudo que você precisa saber sobre suas anotações no Notion"
       >
         <SecondBrainDataTable columns={columns} data={notions} />
       </Container>

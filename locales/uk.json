@@ -1,26 +1,24 @@
 {
   "RootLayout": {
-    "title": "NextCRM",
-    "description": "NextCRM — це CRM з відкритим вихідним кодом, створена на основі NextJS."
+    "title": "Balako Digital CRM",
+    "description": "CRM para agências de marketing digital com automação via WhatsApp"
   },
   "ModuleMenu": {
-    "dashboard": "Панель приладів",
+    "dashboard": "Dashboard",
+    "contacts": "Contatos",
+    "followups": "Follow-ups",
+    "whatsapp": "WhatsApp",
+    "settings": "Configurações",
     "crm": {
       "title": "Продажі",
       "accounts": "Компанії",
-      "opportunities": "Можливості",
       "contacts": "Контакти",
       "leads": "Ліди",
       "contracts": "Договори"
     },
     "projects": "Проекти",
     "emails": "електронні листи",
-    "tasks": "завдання",
-    "invoices": "Рахунки-фактури",
-    "reports": "Звіти",
-    "documents": "Документи",
-    "storage": "Зберігання",
-    "settings": "Адміністрація"
+    "tasks": "завдання"
   },
   "DashboardPage": {
     "containerTitle": "Панель приладів",
@@ -29,15 +27,11 @@
     "expectedRevenue": "Очікуваний дохід",
     "activeUsers": "Активні користувачі",
     "accounts": "Компанії",
-    "opportunities": "Угоди",
     "contacts": "Контакти",
     "leads": "Ліди",
     "projects": "Проекти",
     "tasks": "Завдання",
-    "myTasks": "Мої завдання",
-    "invoices": "Рахунки-фактури",
-    "documents": "Документи",
-    "storage": "Зберігання"
+    "myTasks": "Мої завдання"
   },
   "RegisterComponent": {
     "cardTitle": "Створити новий обліковий запис",

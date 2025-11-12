@@ -7,19 +7,32 @@ import bcrypt from "bcrypt";
 import { newUserNotify } from "./new-user-notify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-function getGoogleCredentials(): { clientId: string; clientSecret: string } {
+function getGoogleCredentials(): { clientId: string; clientSecret: string } | null {
   const clientId = process.env.GOOGLE_ID;
   const clientSecret = process.env.GOOGLE_SECRET;
-  if (!clientId || clientId.length === 0) {
-    throw new Error("Missing GOOGLE_ID");
-  }
-
-  if (!clientSecret || clientSecret.length === 0) {
-    throw new Error("Missing GOOGLE_SECRET");
+  
+  // Retorna null se as credenciais não estiverem configuradas (Google OAuth é opcional)
+  if (!clientId || clientId.length === 0 || !clientSecret || clientSecret.length === 0) {
+    return null;
   }
 
   return { clientId, clientSecret };
 }
+
+function getGitHubCredentials(): { clientId: string; clientSecret: string } | null {
+  const clientId = process.env.GITHUB_ID;
+  const clientSecret = process.env.GITHUB_SECRET;
+  
+  // Retorna null se as credenciais não estiverem configuradas (GitHub OAuth é opcional)
+  if (!clientId || clientId.length === 0 || !clientSecret || clientSecret.length === 0) {
+    return null;
+  }
+
+  return { clientId, clientSecret };
+}
+
+const googleCreds = getGoogleCredentials();
+const githubCreds = getGitHubCredentials();
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.JWT_SECRET,
@@ -29,16 +42,26 @@ export const authOptions: NextAuthOptions = {
   },
 
   providers: [
-    GoogleProvider({
-      clientId: getGoogleCredentials().clientId,
-      clientSecret: getGoogleCredentials().clientSecret,
-    }),
+    // Google OAuth (opcional)
+    ...(googleCreds
+      ? [
+          GoogleProvider({
+            clientId: googleCreds.clientId,
+            clientSecret: googleCreds.clientSecret,
+          }),
+        ]
+      : []),
 
-    GitHubProvider({
-      name: "github",
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
-    }),
+    // GitHub OAuth (opcional)
+    ...(githubCreds
+      ? [
+          GitHubProvider({
+            name: "github",
+            clientId: githubCreds.clientId,
+            clientSecret: githubCreds.clientSecret,
+          }),
+        ]
+      : []),
 
     CredentialsProvider({
       name: "credentials",
@@ -117,6 +140,7 @@ export const authOptions: NextAuthOptions = {
           session.user.isAdmin = false;
           session.user.userLanguage = newUser.userLanguage;
           session.user.userStatus = newUser.userStatus;
+          session.user.role = newUser.role;
           session.user.lastLoginAt = newUser.lastLoginAt;
           return session;
         } catch (error) {
@@ -140,6 +164,7 @@ export const authOptions: NextAuthOptions = {
         session.user.isAdmin = user.is_admin;
         session.user.userLanguage = user.userLanguage;
         session.user.userStatus = user.userStatus;
+        session.user.role = user.role;
         session.user.lastLoginAt = user.lastLoginAt;
       }
 

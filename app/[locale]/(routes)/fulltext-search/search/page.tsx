@@ -14,8 +14,8 @@ const FullTextSearchPage = async (
 
   return (
     <Container
-      title={`Search: ${search} `}
-      description={`Search results for ${search}`}
+      title={`Busca: ${search}`}
+      description={`Resultados da busca para ${search}`}
     >
       <ResultPage search={search} results={results} />
     </Container>

@@ -13,31 +13,31 @@ const ProfilePage = async () => {
   const data = await getUser();
 
   if (!data) {
-    return <div>No user data.</div>;
+    return <div>Nenhum dado de usuário encontrado.</div>;
   }
 
   return (
     <Container
-      title="Profile"
-      description={"Here you can edit your user profile"}
+      title="Perfil"
+      description="Aqui você pode editar seu perfil de usuário"
     >
       <div>
         {/*         <pre>
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre> */}
-        <H4Title>Profile photo</H4Title>
+        <H4Title>Foto de Perfil</H4Title>
         <ProfilePhotoForm data={data} />
 
-        <H4Title>Profile</H4Title>
+        <H4Title>Perfil</H4Title>
         <ProfileForm data={data} />
 
-        <H4Title>Password change</H4Title>
+        <H4Title>Alterar Senha</H4Title>
         <PasswordChangeForm userId={data.id} />
 
-        <H4Title>Notion Integration</H4Title>
+        <H4Title>Integração Notion</H4Title>
         <NotionForm userId={data.id} />
 
-        <H4Title>OpenAI Integration</H4Title>
+        <H4Title>Integração OpenAI</H4Title>
         <OpenAiForm userId={data.id} />
       </div>
     </Container>

@@ -27,17 +27,17 @@ const ProfilePage = async () => {
   if (process.env.OPENAI_API_KEY && !openAiKeyUser && !openAiKeySystem)
     return (
       <Container
-        title="Ai assistant"
-        description={"Ask anything you need to know"}
+        title="Assistente IA"
+        description="Pergunte qualquer coisa que você precise saber"
       >
         <div>
-          <h1>Open AI key not found</h1>
+          <h1>Chave OpenAI não encontrada</h1>
           <p>
-            Please add your open ai key in your
+            Por favor, adicione sua chave OpenAI em
             <Link href={"/profile"} className="text-blue-500">
-              profile settings page{" "}
+              {" "}configurações de perfil{" "}
             </Link>
-            to use the assistant
+            para usar o assistente
           </p>
         </div>
       </Container>
@@ -45,8 +45,8 @@ const ProfilePage = async () => {
 
   return (
     <Container
-      title="Ai assistant"
-      description={"Ask anything you need to know"}
+      title="Assistente IA"
+      description="Pergunte qualquer coisa que você precise saber"
     >
       <Suspense fallback={<div>Loading...</div>}>
         <Chat />

@@ -12,8 +12,8 @@ const AccountsPage = async () => {
 
   return (
     <Container
-      title="Accounts"
-      description={"Everything you need to know about your accounts"}
+      title="Empresas"
+      description="Tudo que você precisa saber sobre suas empresas"
     >
       <Suspense fallback={<SuspenseLoading />}>
         <AccountsView crmData={crmData} data={accounts} />

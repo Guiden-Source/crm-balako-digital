@@ -23,12 +23,12 @@ const ContactViewPage = async (props: any) => {
 
   //  console.log(accounts, "accounts");
 
-  if (!contact) return <div>Contact not found</div>;
+  if (!contact) return <div>Contato não encontrado</div>;
 
   return (
     <Container
-      title={`Contact detail view: ${contact?.first_name} ${contact?.last_name}`}
-      description={"Everything you need to know about sales potential"}
+      title={`Detalhes do Contato: ${contact?.first_name} ${contact?.last_name}`}
+      description="Tudo que você precisa saber sobre o potencial de vendas"
     >
       <div className="space-y-5">
         <BasicView data={contact} />
