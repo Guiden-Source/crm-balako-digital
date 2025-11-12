@@ -107,8 +107,8 @@ export async function GET(req: Request) {
           gte: startOfDay,
           lte: endOfDay,
         },
-        notificationSent: false,
-        completed: false,
+  notificationSent: false,
+  taskStatus: { not: "COMPLETED" },
       },
       include: {
         assigned_user: {
