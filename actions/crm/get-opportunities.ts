@@ -38,7 +38,7 @@ export const getOpportunities = async () => {
             id: true,
             name: true,
             probability: true,
-            value: true,
+            // value: true, // Campo não existe no schema
           },
         },
         assigned_to_user: {
