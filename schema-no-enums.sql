@@ -1,32 +1,12 @@
--- CreateEnum
-CREATE TYPE "crm_Lead_Status" AS ENUM ('NEW', 'CONTACTED', 'QUALIFIED', 'LOST');
 
--- CreateEnum
-CREATE TYPE "crm_Lead_Type" AS ENUM ('DEMO');
 
--- CreateEnum
-CREATE TYPE "crm_Opportunity_Status" AS ENUM ('ACTIVE', 'INACTIVE', 'PENDING', 'CLOSED');
 
--- CreateEnum
-CREATE TYPE "crm_Contact_Type" AS ENUM ('Customer', 'Partner', 'Vendor', 'Prospect');
 
--- CreateEnum
-CREATE TYPE "crm_Contracts_Status" AS ENUM ('NOTSTARTED', 'INPROGRESS', 'SIGNED');
 
--- CreateEnum
-CREATE TYPE "DocumentSystemType" AS ENUM ('INVOICE', 'RECEIPT', 'CONTRACT', 'OFFER', 'OTHER');
 
--- CreateEnum
-CREATE TYPE "taskStatus" AS ENUM ('ACTIVE', 'PENDING', 'COMPLETE');
 
--- CreateEnum
-CREATE TYPE "ActiveStatus" AS ENUM ('ACTIVE', 'INACTIVE', 'PENDING');
 
--- CreateEnum
-CREATE TYPE "Language" AS ENUM ('pt');
 
--- CreateEnum
-CREATE TYPE "gptStatus" AS ENUM ('ACTIVE', 'INACTIVE');
 
 -- CreateTable
 CREATE TABLE "crm_Accounts" (
