@@ -153,14 +153,8 @@ export async function PUT(req: Request) {
       await sendEmail({
         from: process.env.EMAIL_FROM as string,
         to: notifyRecipient.email || "info@softbase.cz",
-        subject:
-          notifyRecipient.userLanguage === "en"
-            ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you.`
-            : `Nová příležitost ${firstName} ${lastName} byla přidána do systému a přidělena vám.`,
-        text:
-          notifyRecipient.userLanguage === "en"
-            ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`
-            : `Nová příležitost ${firstName} ${lastName} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`,
+        subject: `Novo lead ${firstName} ${lastName} foi atualizado no sistema e atribuído a você.`,
+        text: `Novo lead ${firstName} ${lastName} foi atualizado no sistema e atribuído a você. Você pode ver os detalhes aqui: ${process.env.NEXT_PUBLIC_APP_URL}/crm/leads/${updatedLead.id}`,
       });
     }
 
