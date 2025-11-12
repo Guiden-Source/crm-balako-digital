@@ -58,7 +58,7 @@ export const getOpportunities = async () => {
         },
       },
       orderBy: {
-        cratedAt: "desc",
+        createdAt: "desc",
       },
     });
 
