@@ -103,7 +103,7 @@ export async function GET(req: Request) {
     
     const tasks = await prismadb.tasks.findMany({
       where: {
-        dueDate: {
+        dueDateAt: {
           gte: startOfDay,
           lte: endOfDay,
         },
