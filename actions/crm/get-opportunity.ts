@@ -37,12 +37,12 @@ export const getOpportunity = async (opportunityId: string) => {
           email: true,
         },
       },
-      documents: {
-        select: {
-          id: true,
-          document_name: true,
-        },
-      },
+      // documents: { // Módulo documents temporariamente desabilitado
+      //   select: {
+      //     id: true,
+      //     document_name: true,
+      //   },
+      // },
     },
   });
   return data;
